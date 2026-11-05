@@ -18,7 +18,7 @@ type Product = {
 };
 
 type Settings={tagline:string;whatsapp:string;maps_url:string;instagram:string;tiktok:string;shop_url:string;about:string};
-
+const ADMIN_UID = '2aa3635e-0af6-4ac5-9ad1-198c0b2e81ab';
 const blank: Product = {
   name: '',
   category: 'Ground Coffee',
@@ -39,7 +39,8 @@ const [productCategory,setProductCategory]=useState('All');
 const [uploading,setUploading]=useState(false);
 const [uploadMessage,setUploadMessage]=useState('');
  useEffect(()=>{if(!supabase)return;supabase.auth.getSession().then(({data})=>setSession(data.session));const {data:listener}=supabase.auth.onAuthStateChange((_e,s)=>setSession(s));return()=>listener.subscription.unsubscribe()},[]);
- async function load(){if(!supabase)return;const [p,s,e]=await Promise.all([supabase.from('products').select('*').order('sort_order'),supabase.from('site_settings').select('*').eq('id',1).maybeSingle(),supabase.from('click_events').select('*').order('created_at',{ascending:false}).limit(30)]);setProducts((p.data||[]) as Product[]);if(s.data)setSettings({...defaults,...s.data});setEvents(e.data||[])}
+ async function load(){
+  if (!supabase || !session || session.user.id !== ADMIN_UID) return;if(!supabase)return;const [p,s,e]=await Promise.all([supabase.from('products').select('*').order('sort_order'),supabase.from('site_settings').select('*').eq('id',1).maybeSingle(),supabase.from('click_events').select('*').order('created_at',{ascending:false}).limit(30)]);setProducts((p.data||[]) as Product[]);if(s.data)setSettings({...defaults,...s.data});setEvents(e.data||[])}
  useEffect(()=>{if(session)void load()},[session]);
 const categories = [
   'All',
@@ -110,10 +111,42 @@ async function saveProduct(e:React.FormEvent){e.preventDefault();if(!supabase)re
  if(!hasSupabase)return <main className="admin-shell"><div className="admin-card"><a className="brand-logo" href="/">
  <img src="/lodaya-logo.png" alt="Lodaya Coffee Nusantara" />
 </a><p className="section-kicker">ADMIN SETUP</p><h1>Connect your<br/><em>digital workspace.</em></h1><p>Dashboard admin sudah disiapkan. Hubungkan project Supabase terlebih dahulu agar login, katalog, pengaturan, dan statistik tersimpan secara online.</p><ol><li>Buat project di Supabase.</li><li>Salin Project URL dan anon key.</li><li>Isi file <code>.env.local</code> sesuai panduan README.</li><li>Jalankan ulang website.</li></ol><a className="button button-dark" href="https://supabase.com/dashboard" target="_blank">Open Supabase ↗</a><a className="under-link" href="/">← Back to website</a></div></main>;
- if(!session)return <main className="admin-shell"><form className="admin-card" onSubmit={login}><a className="brand-logo" href="/">
-  <img src="/lodaya-logo.png" alt="Lodaya Coffee Nusantara" />
-</a><p className="section-kicker">PRIVATE ACCESS</p><h1>Admin<br/><em>workspace.</em></h1><label>Email address<input type="email" value={email} onChange={e=>setEmail(e.target.value)} required/></label><label>Password<input type="password" value={password} onChange={e=>setPassword(e.target.value)} required/></label><button className="button button-dark">Sign in ↗</button>{message&&<p className="notice">{message}</p>}<a className="under-link" href="/">← Back to website</a></form></main>;
- return <main className="dashboard"><aside className="sidebar"><a className="brand-logo brand-logo-white" href="/">
+ if (!session) return (
+  <main className="admin-shell">
+    <form className="admin-card" onSubmit={login}>
+      <a className="brand-logo" href="/">
+        <img src="/lodaya-logo.png" alt="Lodaya Coffee Nusantara" />
+      </a>
+      <p className="section-kicker">PRIVATE ACCESS</p>
+      <h1>Admin<br/><em>workspace.</em></h1>
+      <label>Email address
+        <input type="email" value={email} onChange={e=>setEmail(e.target.value)} required/>
+      </label>
+      <label>Password
+        <input type="password" value={password} onChange={e=>setPassword(e.target.value)} required/>
+      </label>
+      <button className="button button-dark">Sign in ↗</button>
+      {message && <p className="notice">{message}</p>}
+      <a className="under-link" href="/">← Back to website</a>
+    </form>
+  </main>
+);
+
+if (session.user.id !== ADMIN_UID) {
+  return (
+    <main className="admin-shell">
+      <div className="admin-card">
+        <h1>Access denied.</h1>
+        <p>Akun ini tidak memiliki izin administrator.</p>
+        <button className="button button-dark" onClick={() => supabase?.auth.signOut()}>
+          Sign out
+        </button>
+      </div>
+    </main>
+  );
+}
+
+return <main className="dashboard"><aside className="sidebar"><a className="brand-logo brand-logo-white" href="/">
   <img src="/lodaya-logo-white.png" alt="Lodaya Coffee Nusantara" />
 </a><p className="section-kicker">MANAGEMENT</p>{[['overview','Overview'],['products','Products'],['settings','Site settings']].map(([id,label])=><button key={id} className={tab===id?'side-active':'side-button'} onClick={()=>setTab(id)}>{label}</button>)}<button className="side-button signout" onClick={()=>supabase?.auth.signOut()}>Sign out ↗</button></aside><section className="dash-main"><div className="dash-top"><div><p className="section-kicker">LODAYA DIGITAL HUB / ADMIN</p><h1>{tab==='overview'?'Overview':tab==='products'?'Product catalog':'Site settings'}</h1></div><a href="/" target="_blank" className="under-link">View website ↗</a></div>
  {tab==='overview'&&<>
