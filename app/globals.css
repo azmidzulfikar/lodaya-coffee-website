@@ -601,4 +601,59 @@ input[type="file"] {
   }
 }
 
+/* MOBILE RESPONSIVE — LODAYA */
+@media (max-width: 768px) {
+  .hero {
+    min-height: 720px;
+    height: auto;
+    padding: 100px 24px 70px;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-content {
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    z-index: 4;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(42px, 11vw, 58px);
+    line-height: 1.08;
+    max-width: 100%;
+  }
+
+  .hero-content p {
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 100%;
+  }
+
+  .hero-brand-logo {
+    width: 125px;
+    height: 125px;
+    top: 35px;
+    right: 20px;
+    transform: none;
+    opacity: 0.18;
+  }
+
+  .hero-content a {
+    font-size: 13px;
+  }
+
+  .story-layout {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .story-content,
+  .story-visual {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+
 

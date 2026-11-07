@@ -53,7 +53,7 @@ const productWhatsApp = (p: Product, action: string) => {
   <nav className="nav wrap"><div className="navlinks"><a href="#story">Our Story</a><a href="#products">Products</a><a href="#contact">Contact</a></div></nav>
   <section className="hero" id="top"><div className="hero-brand-logo">
   <img src="/lodaya-logo-white.png" alt="Lodaya Coffee Nusantara" />
-</div><div className="hero-image"/><div className="hero-shade"/><div className="hero-content wrap"><p className="eyebrow">COFFEE • ORIGIN • NUSANTARA</p><h1>Good coffee.<br/><em>Grounded in</em><br/>Indonesia.</h1><p className="hero-copy">{settings.tagline} Discover the stories and character behind every origin.</p><div className="hero-actions"><a className="button button-light" href="#products">Explore our coffee <span>↗</span></a><a className="text-link" href={wa} onClick={()=>track('hero_whatsapp')}>Talk to our team ↗</a></div></div><div className="hero-index">01 / 04</div></section>
+</div><div className="hero-image"/><div className="hero-shade"/><div className="hero-content wrap"><p className="eyebrow">COFFEE • ORIGIN • NUSANTARA</p><h1>Good coffee.<br/><em>Grounded in</em><br/>Indonesia.</h1><p className="hero-copy">{settings.tagline} Discover the stories and character behind every origin.</p><div className="hero-actions"><a className="button button-light" href="#products">Explore our coffee </a><a className="text-link" href={wa} onClick={()=>track('hero_whatsapp')}>Talk to our team </a></div></div><div className="hero-index">01 / 04</div></section>
   
 <section className="story-profile" id="story">
   <div className="wrap story-layout">
@@ -97,11 +97,11 @@ const productWhatsApp = (p: Product, action: string) => {
       <div className="story-actions">
   <a href={wa} target="_blank" rel="noreferrer"
     onClick={()=>track('story_whatsapp')}>
-    <span>☏</span> START A CONVERSATION ↗
+    <span>☏</span> START A CONVERSATION
   </a>
   <a href={settings.maps_url} target="_blank" rel="noreferrer"
     onClick={()=>track('story_location')}>
-    <span>⌖</span> OUR LOCATION ↗
+    <span>⌖</span> OUR LOCATION
   </a>
 </div>
     </div>
@@ -320,7 +320,7 @@ const productWhatsApp = (p: Product, action: string) => {
           opacity:(p.stock ?? 0)>0?1:0.5
         }}
       >
-        BUY NOW ↗
+        BUY NOW
       </a>
     </div>
   </article>
@@ -333,15 +333,15 @@ const productWhatsApp = (p: Product, action: string) => {
     </p>
   )}
 </div>
-<div className="center-action"><a className="button button-dark" href={settings.shop_url} onClick={()=>track('shop_all')}>Shop our selection ↗</a></div></div></section>
+<div className="center-action"><a className="button button-dark" href={settings.shop_url} onClick={()=>track('shop_all')}>Shop our selection </a></div></div></section>
   <section className="origin-band"><div className="origin-photo"/><div className="origin-copy"><div className="section-kicker">03 — ROOTED IN THE ARCHIPELAGO</div><h2>Many origins.<br/><em>One shared passion.</em></h2><p>Indonesia’s coffee landscape is rich with places, people, and traditions. We’re here to help you explore it, one cup at a time.</p><div className="origin-actions">
   <a href={wa} target="_blank" rel="noreferrer"
     onClick={()=>track('origin_whatsapp')}>
-    ☏ START CHAT ↗
+    ☏ START CHAT
   </a>
   <a href={settings.maps_url} target="_blank" rel="noreferrer"
     onClick={()=>track('origin_location')}>
-    ⌖ FIND OUR LOCATION ↗
+    ⌖ FIND OUR LOCATION
   </a>
 </div></div></section>
   <section className="contact wrap" id="contact"><div className="section-kicker">04 — CONNECT WITH LODAYA</div><h2>Let’s make<br/><em>good things happen.</em></h2><p>For product inquiries, wholesale, partnerships, or simply a conversation about coffee — we’d love to hear from you.</p>
@@ -355,7 +355,7 @@ const productWhatsApp = (p: Product, action: string) => {
         <path d="M8.5 8.5c.5 2.5 2 4 4.5 5l1.5-1.5 2 1c-.3 1.5-1.2 2.2-2.5 2.2-3.8-.4-6.3-2.9-6.7-6.7 0-1.3.7-2.2 2.2-2.5l1 2-1.5 1.5"/>
       </svg>
     </span>
-    <span>WhatsApp</span><span>↗</span>
+    <span>WhatsApp</span>
   </a>
 
   <a href={settings.instagram} target="_blank" rel="noreferrer"
@@ -367,7 +367,7 @@ const productWhatsApp = (p: Product, action: string) => {
         <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/>
       </svg>
     </span>
-    <span>Instagram</span><span>↗</span>
+    <span>Instagram</span><span></span>
   </a>
 
   <a href={settings.tiktok} target="_blank" rel="noreferrer"
@@ -378,7 +378,7 @@ const productWhatsApp = (p: Product, action: string) => {
         <path d="M14 3c.5 3 2.5 5 5 5.5"/>
       </svg>
     </span>
-    <span>TikTok</span><span>↗</span>
+    <span>TikTok</span><span></span>
   </a>
 
   <a href={settings.maps_url} target="_blank" rel="noreferrer"
@@ -389,7 +389,7 @@ const productWhatsApp = (p: Product, action: string) => {
         <circle cx="12" cy="10" r="2.5"/>
       </svg>
     </span>
-    <span>Our Location</span><span>↗</span>
+    <span>Our Location</span><span></span>
   </a>
 
   <a href={`mailto:${process.env.NEXT_PUBLIC_EMAIL || ''}`}
@@ -400,7 +400,7 @@ const productWhatsApp = (p: Product, action: string) => {
         <path d="m3 7 9 6 9-6"/>
       </svg>
     </span>
-    <span>Email</span><span>↗</span>
+    <span>Email</span><span></span>
   </a>
 
 </div>
@@ -500,7 +500,7 @@ const productWhatsApp = (p: Product, action: string) => {
       opacity:(selectedProduct.stock ?? 0)>0?1:0.5
     }}
   >
-    BUY NOW ↗
+    BUY NOW
   </a>
 </div>     </div>
   </div>
