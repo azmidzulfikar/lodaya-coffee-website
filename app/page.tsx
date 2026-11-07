@@ -355,7 +355,8 @@ const productWhatsApp = (p: Product, action: string) => {
         <path d="M8.5 8.5c.5 2.5 2 4 4.5 5l1.5-1.5 2 1c-.3 1.5-1.2 2.2-2.5 2.2-3.8-.4-6.3-2.9-6.7-6.7 0-1.3.7-2.2 2.2-2.5l1 2-1.5 1.5"/>
       </svg>
     </span>
-    <span>WhatsApp</span>
+           <span>WhatsApp</span>
+    <span></span>
   </a>
 
   <a href={settings.instagram} target="_blank" rel="noreferrer"
