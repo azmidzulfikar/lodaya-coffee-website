@@ -654,6 +654,35 @@ input[type="file"] {
     max-width: 100%;
   }
 }
+/* MOBILE HERO LOGO VISIBILITY */
+@media (max-width: 768px) {
+  .hero-brand-logo {
+    opacity: 1 !important;
+  }
+
+  .hero-brand-logo img {
+    opacity: 1 !important;
+    filter: brightness(1.3) contrast(1.1);
+  }
+}
+/* MOBILE CONTACT ALIGNMENT */
+@media (max-width: 768px) {
+  .contact-links a {
+    justify-content: flex-start !important;
+    gap: 16px !important;
+    padding: 20px 12px !important;
+  }
+
+  .contact-icon {
+    flex: 0 0 32px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .contact-links a span {
+    text-align: left;
+  }
+}
 
 
 
